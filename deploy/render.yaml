@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: energy-app-api
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    plan: free
+    healthCheckPath: /health
+
+  - type: web
+    name: energy-app-frontend
+    runtime: docker
+    dockerfilePath: ./frontend/Dockerfile
+    plan: free
+    envVars:
+      - key: ENERGY_FORCE_API
+        value: "1"
+      - key: ENERGY_API_URL
+        value: "https://energy-app-api.onrender.com"
